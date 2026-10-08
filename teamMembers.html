@@ -1,0 +1,23 @@
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"
+     data-sly-call="${clientlib.all @ categories='mysite.teammembers'}"/>
+
+<sly data-sly-use.model="com.mysite.core.models.TeamMembersModel">
+
+    <section class="team-members" data-cmp-is="team-members" data-sly-test="${model.members}">
+        <h2 class="team-members__title">Our Team</h2>
+        <div class="team-members__grid" data-sly-list.member="${model.members}">
+            <div class="team-member-card">
+                <div class="team-member-card__image-wrapper" data-sly-test="${member.photo}">
+                    <img class="team-member-card__photo" src="${member.photo}" alt="${member.name}" />
+                </div>
+                <h3 class="team-member-card__name" data-sly-test="${member.name}">${member.name}</h3>
+                <p class="team-member-card__role" data-sly-test="${member.role}">${member.role}</p>
+            </div>
+        </div>
+    </section>
+
+    <div data-sly-test="${!model.members && wcmmode.edit}"
+         class="cq-placeholder"
+         data-emptytext="Team Members (Click wrench to add team members)"></div>
+
+</sly>
